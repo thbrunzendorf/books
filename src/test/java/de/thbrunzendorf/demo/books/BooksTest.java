@@ -14,9 +14,12 @@ public class BooksTest {
 
     private List<BookRegisteredEvent> newEvents = new ArrayList<BookRegisteredEvent>();
 
+    private void given() {
+    }
+
     private void when(RegisterBookCommand command) {
         BookRegisteredEvent event = new BookRegisteredEvent();
-        newEvents.add(event);
+        newEvents = new CommandHandler().handle(command);
     }
 
     private void then(BookRegisteredEvent event) {
@@ -27,6 +30,7 @@ public class BooksTest {
 
     @Test
     public void bookRegistered() {
+        given();
         when(new RegisterBookCommand("Refactoring","Martin Fowler"));
         then(new BookRegisteredEvent());
     }
