@@ -7,10 +7,16 @@ import org.junit.Test;
  */
 public class BooksTest {
 
-    @Test
-    public void bookRegistered() {
 
+    private void when(RegisterBookCommand command) {
     }
 
+    private void then(BookRegisteredEvent event) {
+    }
 
+    @Test
+    public void bookRegistered() {
+        when(new RegisterBookCommand("Refactoring","Martin Fowler"));
+        then(new BookRegisteredEvent());
+    }
 }
