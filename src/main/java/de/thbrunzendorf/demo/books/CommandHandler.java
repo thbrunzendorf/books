@@ -14,8 +14,6 @@ public class CommandHandler {
     public List<BookRegisteredEvent> handle(RegisterBookCommand command) {
         String id = UUID.randomUUID().toString();
         Book book = new Book(id, command.getTitle(), command.getAuthor());
-        ArrayList<BookRegisteredEvent> events = new ArrayList<BookRegisteredEvent>();
-        events.add(new BookRegisteredEvent());
-        return events;
+        return Publisher.published();
     }
 }
