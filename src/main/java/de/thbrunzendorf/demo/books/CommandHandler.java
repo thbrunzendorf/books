@@ -7,13 +7,15 @@ import java.util.UUID;
 /**
  * Created by Thorsten on 15.06.2016.
  */
-public class CommandHandler {
-    public CommandHandler() {
-    }
+public abstract class CommandHandler {
 
-    public List<BookRegisteredEvent> handle(RegisterBookCommand command) {
-        String id = UUID.randomUUID().toString();
-        Book book = new Book(id, command.getTitle(), command.getAuthor());
-        return Publisher.published();
+    abstract public List<Event> handle(Command command);
+
+    public static CommandHandler createFor(Command command) {
+        if (command instanceof RegisterBookCommand)
+            return new RegisterBookCommandHandler();
+        if (command instanceof MoveBookCommand)
+            return new MoveBookCommandHandler();
+        throw new RuntimeException("Missing Handler for Command "+command.getClass().getName());
     }
 }

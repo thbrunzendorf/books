@@ -7,14 +7,19 @@ import java.util.List;
  * Created by Thorsten on 26.06.2016.
  */
 public class Publisher {
-    private static List<BookRegisteredEvent> published = new ArrayList<BookRegisteredEvent>();
+    private static List<Event> published = new ArrayList<Event>();
 
-    public static void publish(BookRegisteredEvent event) {
-        EventStore.store(event);
+    public static void publish(Event event) {
+        EventStore.append(event);
         published.add(event);
     }
 
-    public static List<BookRegisteredEvent> published() {
+    public static List<Event> published() {
         return published;
+    }
+
+    public static void reset() {
+        EventStore.clear();
+        published.clear();
     }
 }
